@@ -1,4 +1,40 @@
 // Your Script here.
+function rot13(encodedString) {
+  // Define the ranges for uppercase letters
+  const rangeStart = 'A'.charCodeAt(0);
+  const rangeEnd = 'Z'.charCodeAt(0);
+
+  // Convert the encoded string to an array of characters
+  const encodedChars = encodedString.split('');
+
+  // Iterate through each character in the encoded string
+  const decodedChars = encodedChars.map((char) => {
+    // Convert the character to its ASCII code
+    const charCode = char.charCodeAt(0);
+
+    // Check if the character is within the range of uppercase letters
+    if (charCode >= rangeStart && charCode <= rangeEnd) {
+      // Apply ROT13 transformation by shifting the character code by 13 positions
+      let decodedCharCode = charCode - 13;
+
+      // Handle wraparound if the decoded character code is less than the range start
+      if (decodedCharCode < rangeStart) {
+        decodedCharCode += 26;
+      }
+
+      // Convert the decoded character code back to a character
+      return String.fromCharCode(decodedCharCode);
+    }
+
+    // Return non-alphabetic characters as they are
+    return char;
+  });
+
+  // Join the decoded characters into a string
+  const decodedString = decodedChars.join('');
+
+  return decodedString;
+}
 
 const lookup = {
   'A': 'N','B': 'O','C': 'P','D': 'Q',
